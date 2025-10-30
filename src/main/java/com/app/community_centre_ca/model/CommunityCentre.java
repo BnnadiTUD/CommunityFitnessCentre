@@ -29,7 +29,7 @@ public class CommunityCentre {
 	@Column(name = "Address_of_Community_Centre", nullable = true, length = 100)
 	private String address;
 	
-	  @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	  @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	  @JoinColumn(name = "centre_id", nullable = true)     // FK on MEMBERS
 	 private Set<Member> members = new HashSet<>(); 
 	  
@@ -41,6 +41,15 @@ public class CommunityCentre {
 		  this.name = name;
 		  this.address = address;
 		  if (members != null) this.members.addAll(members);
+	  }
+
+@XmlElement	  
+	  public long getId() {
+		return id;
+	}
+
+	  public void setId(long id) {
+		  this.id = id;
 	  }
 
 	  @XmlElement

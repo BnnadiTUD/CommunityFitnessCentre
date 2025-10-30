@@ -5,7 +5,7 @@
     <groupId>com.app</groupId>
     <artifactId>community_centre_ca</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>community_centre_ca Jersey Webapp</name>
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
