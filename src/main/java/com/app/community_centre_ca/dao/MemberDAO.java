@@ -49,5 +49,18 @@ public class MemberDAO {
 		return members;
 	}
 	
-
+	
+	// MemberDAO.java
+	public Member assignExistingMemberToCentre(long centreId, long memberId) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	    
+	        CommunityCentre centre = em.find(CommunityCentre.class, centreId);
+	        Member member = em.find(Member.class, memberId);
+	        centre.getMembers().add(member);
+	        em.getTransaction().commit();
+	        em.close();
+	        return member;
+	}
+	
 }

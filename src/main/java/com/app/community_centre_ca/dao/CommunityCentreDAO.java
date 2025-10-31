@@ -49,5 +49,15 @@ public class CommunityCentreDAO {
 		return communityCentres;
 	}
 	
+	public CommunityCentre findById(Long id) {
+	    EntityManager em = emf.createEntityManager();
+	    try {
+	        return em.find(CommunityCentre.class, id);
+	    } finally {
+	        em.close();
+	    }
+	}
+
+	
 
 }

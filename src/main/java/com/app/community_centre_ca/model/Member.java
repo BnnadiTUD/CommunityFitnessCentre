@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -38,11 +41,11 @@ public class Member {
 	@Column(name = "Fitness_Goal", nullable = true, length = 100)
 	private String goal;
 	
-	  @ManyToOne(fetch = FetchType.LAZY, optional = true)
+	  @ManyToOne(fetch = FetchType.EAGER, optional = true)
 	  @JoinColumn(name = "plan_id", nullable = true)     // FK on PLANS
 	  private Plan plan; 
 	  
-	  @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = { CascadeType.ALL })
+	  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = { CascadeType.ALL })
 	  @JoinColumn(name = "member_id", nullable = true)     // FK on PAYMENTS
 	  private Set<Payment> payments = new HashSet<>(); 
 	  
@@ -58,8 +61,18 @@ public class Member {
 		this.plan = plan;
 		if (payments != null) this.payments.addAll(payments);
     }
-
+    
+    
     @XmlElement
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@XmlElement
 	public String getName() {
 		return name;
 	}
