@@ -21,12 +21,19 @@ public class PlanDAO {
 		em.close();
 	}
 	
-	public void removePlan(Plan p) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.remove(em.merge(p));
-		em.getTransaction().commit();
-		em.close();
+	/*
+	 * public void removePlan(Plan p) { EntityManager em =
+	 * emf.createEntityManager(); em.getTransaction().begin();
+	 * em.remove(em.merge(p)); em.getTransaction().commit(); em.close(); }
+	 */
+	
+	public void removePlan(long id) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	        Plan p = em.find(Plan.class, id);
+	            em.remove(p);
+	        em.getTransaction().commit();
+	        em.close();
 	}
 	
 	public Plan merge(Plan p) {
@@ -60,6 +67,19 @@ public class PlanDAO {
 	        em.getTransaction().commit();
 	        em.close();
 	        return plan;
+	}
+	
+	public Plan addNewPlanToMember(long memberId, Plan p) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	    
+	        Member member = em.find(Member.class, memberId);
+	        member.setPlan(p);
+	        em.persist(p);
+	        em.getTransaction().commit();
+	        em.close();
+
+	        return p;
 	}
 	
 	public Plan findById(Long id) {

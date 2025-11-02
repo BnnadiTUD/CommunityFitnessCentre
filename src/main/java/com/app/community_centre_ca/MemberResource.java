@@ -3,6 +3,7 @@ package com.app.community_centre_ca;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -30,6 +31,13 @@ public class MemberResource {
 	        mDAO.persist(member);
 	        return "Member saved...";
 	    }
+	    
+	    @DELETE
+	    @Path("/members/{id}")
+	    public String deleteMember(@PathParam("id") long id) {
+	        mDAO.removeMember(id);
+	        return "Member deleted ....";
+	    }
 	  
 	    //get all members
 	  @GET
@@ -52,7 +60,7 @@ public class MemberResource {
 	  @Path("/members/{memberId}/payments")
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  @Produces(MediaType.APPLICATION_JSON)
-	  public Payment addPayment(
+	  public Payment assignNewPlanToMember(
 	          @PathParam("memberId") long memberId,
 	          Payment p
 	  ) {

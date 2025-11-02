@@ -21,12 +21,19 @@ public class MemberDAO {
 		em.close();
 	}
 	
-	public void removeMember(Member m) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.remove(em.merge(m));
-		em.getTransaction().commit();
-		em.close();
+	/*not ideal
+	 * public void removeMember(Member m) { EntityManager em =
+	 * emf.createEntityManager(); em.getTransaction().begin();
+	 * em.remove(em.merge(m)); em.getTransaction().commit(); em.close(); }
+	 */
+	
+	public void removeMember(long id) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	        Member m = em.find(Member.class, id);
+	            em.remove(m);
+	        em.getTransaction().commit();
+	        em.close();
 	}
 	
 	public Member merge(Member m) {

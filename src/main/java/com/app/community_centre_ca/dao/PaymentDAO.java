@@ -23,12 +23,20 @@ public class PaymentDAO {
 		em.close();
 	}
 	
-	public void removePayment(Payment p) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.remove(em.merge(p));
-		em.getTransaction().commit();
-		em.close();
+	/*
+	 * public void removePayment(Payment p) { EntityManager em =
+	 * emf.createEntityManager(); em.getTransaction().begin();
+	 * em.remove(em.merge(p)); em.getTransaction().commit(); em.close(); }
+	 */
+	
+	
+	public void removePayment(long id) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	        Payment p = em.find(Payment.class, id);
+	            em.remove(p);
+	        em.getTransaction().commit();
+	        em.close();
 	}
 	
 	//unrealistic but will keep in for learning purpose (in real life once you pay for something it is almost impossible to edit

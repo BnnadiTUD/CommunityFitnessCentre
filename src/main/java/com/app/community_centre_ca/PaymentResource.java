@@ -3,6 +3,7 @@ package com.app.community_centre_ca;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -35,6 +36,13 @@ public class PaymentResource {
 		public List<Payment> getAllPayments() {
 			return pDAO.getAllPayments();
 		}
+	  
+	    @DELETE
+	    @Path("/payment/{id}")
+	    public String deletePayment(@PathParam("id") long id) {
+	        pDAO.removePayment(id);
+	        return "Payment deleted ....";
+	    }
 	  
 	  
 		/*Not actually needed, not realistic in the real world.
