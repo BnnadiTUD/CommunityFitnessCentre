@@ -21,7 +21,7 @@ public class MemberDAO {
 		em.close();
 	}
 	
-	public void removeCommunityCentre(Member m) {
+	public void removeMember(Member m) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.remove(em.merge(m));
@@ -49,8 +49,13 @@ public class MemberDAO {
 		return members;
 	}
 	
+	// using for assiggning plans and payments to an existing member
+	public Member findById(Long id) {
+	    EntityManager em = emf.createEntityManager();
+        em.close();
+	        return em.find(Member.class, id);	    
+	}
 	
-	// MemberDAO.java
 	public Member assignExistingMemberToCentre(long centreId, long memberId) {
 	    EntityManager em = emf.createEntityManager();
 	    em.getTransaction().begin();
@@ -61,6 +66,19 @@ public class MemberDAO {
 	        em.getTransaction().commit();
 	        em.close();
 	        return member;
+	}
+	
+	public Member addNewMemberToCentre(long centreId, Member m) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	    
+	        CommunityCentre centre = em.find(CommunityCentre.class, centreId);
+	        centre.getMembers().add(m);
+	        em.persist(m);
+	        em.getTransaction().commit();
+	        em.close();
+
+	        return m;
 	}
 	
 }
