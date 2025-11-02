@@ -32,6 +32,27 @@ public class MemberResource {
 	        return "Member saved...";
 	    }
 	    
+		//assign an existing member to a community centre
+		@PUT
+		@Path("/centres/{centreId}/members/{memberId}")
+		public Member assignExistingMemberToCentre(
+		        @PathParam("centreId") long centreId,
+		        @PathParam("memberId") long memberId) {
+		    return mDAO.assignExistingMemberToCentre(centreId, memberId);
+		}
+		
+		//assign a new member to a communitcentre
+		  @POST
+		  @Path("/centres/{centreId}/members")
+		  @Consumes(MediaType.APPLICATION_JSON)
+		  @Produces(MediaType.APPLICATION_JSON)
+		  public Member assignNewMemberToCentre(
+		          @PathParam("centreId") long centreId,
+		          Member m
+		  ) {
+		      return mDAO.addNewMemberToCentre(centreId, m);
+		  }
+	    
 	    @DELETE
 	    @Path("/members/{id}")
 	    public String deleteMember(@PathParam("id") long id) {
@@ -45,37 +66,4 @@ public class MemberResource {
 		public List<Member> getMembers() {
 			return mDAO.getAllMembers();
 		}
-	  
-	  //there is an option to add a plan that has already been created to a an existing user
-	  @PUT
-		@Path("/members/{memberId}/plans/{planId}")
-		public Plan assignPlanToMember(
-		        @PathParam("memberId") long memberId,
-		        @PathParam("planId") long planId) {
-		    return pDAO.assignExistingPlanToMember(memberId, planId);
-		}
-	  
-	  //creating a payment and assigning it to a member
-	  @POST
-	  @Path("/members/{memberId}/payments")
-	  @Consumes(MediaType.APPLICATION_JSON)
-	  @Produces(MediaType.APPLICATION_JSON)
-	  public Payment assignNewPlanToMember(
-	          @PathParam("memberId") long memberId,
-	          Payment p
-	  ) {
-	      return paymentDAO.addNewPaymentToMember(memberId, p);
-	  }
-	  
-		/*Not actually needed, not realistic in the real world.
-		 * @PUT
-		 * Add an already existing payment to a member
-		 * @Path("/members/{memberId}/payments/{paymentId}") public Payment
-		 * assignPaymentsToMember(
-		 * 
-		 * @PathParam("memberId") long memberId,
-		 * 
-		 * @PathParam("paymentId") long paymentId) { return
-		 * paymentDAO.assignExistingPaymentToMmber(memberId, paymentId); }
-		 */
 }

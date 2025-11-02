@@ -19,7 +19,6 @@ import com.app.community_centre_ca.model.*;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PaymentResource {
 	
-	private MemberDAO mDAO = new MemberDAO();
 	private PaymentDAO pDAO = new PaymentDAO();
 		  
 	/*
@@ -29,6 +28,18 @@ public class PaymentResource {
 	 * @Path("/persistPayments") public String saveMember(Member member) {
 	 * mDAO.persist(member); return "Member saved..."; }
 	 */
+	
+	  //creating a payment and assigning it to a member
+	  @POST
+	  @Path("/members/{memberId}/payments")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  public Payment assignNewPlanToMember(
+	          @PathParam("memberId") long memberId,
+	          Payment p
+	  ) {
+	      return pDAO.addNewPaymentToMember(memberId, p);
+	  }
 	  
 	    //get all paymnts
 	  @GET

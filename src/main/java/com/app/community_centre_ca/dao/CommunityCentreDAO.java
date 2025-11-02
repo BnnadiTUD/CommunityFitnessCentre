@@ -21,12 +21,13 @@ public class CommunityCentreDAO {
 		em.close();
 	}
 	
-	public void removeCommunityCentre(CommunityCentre cc) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.remove(em.merge(cc));
-		em.getTransaction().commit();
-		em.close();
+	public void removeCommunityCentre(long id) {
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
+	        CommunityCentre c = em.find(CommunityCentre.class, id);
+	            em.remove(c);
+	        em.getTransaction().commit();
+	        em.close();
 	}
 	
 	public CommunityCentre merge(CommunityCentre cc) {
