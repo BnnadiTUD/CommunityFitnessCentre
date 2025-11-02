@@ -16,12 +16,15 @@ import javax.ws.rs.core.MediaType;
 import com.app.community_centre_ca.dao.*;
 import com.app.community_centre_ca.model.*;
 
+@Path("/planService")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PlanResource {
 	private PlanDAO pDAO = new PlanDAO();
 
 //add a plan --- add plan and assign it to member is in member resource	
     @POST
-    @Path("/persistMembers")
+    @Path("/persistPlans")
     public String saveMember(Plan p) {
         pDAO.persist(p);
         return "Plan saved...";

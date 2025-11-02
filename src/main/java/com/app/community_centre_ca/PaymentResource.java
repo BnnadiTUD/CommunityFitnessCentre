@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import com.app.community_centre_ca.dao.*;
 import com.app.community_centre_ca.model.*;
 
-@Path("/memberService")
+@Path("/paymentService")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PaymentResource {
