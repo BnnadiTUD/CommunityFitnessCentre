@@ -1,5 +1,6 @@
 package resource;
 
+import auth.AuthService;
 import entities.User;
 import repos.UserRepo;
 import jakarta.inject.Inject;
@@ -17,16 +18,26 @@ public class UserResource {
     @Inject
     UserRepo uR;
 
+    @Inject
+    AuthService authService;
+
+    private User requireAdmin(String token) {
+        User u = authService.getUserFromToken(token);
+        return u;
+    }
+
     @GET
-    public List<User> getAll() {
+    public List<User> getAll(@HeaderParam("Authorization") String token) {
+        requireAdmin(token);
         return uR.listAll();
     }
 
     @GET
     @Path("/{id}")
-    public User getOne(@PathParam("id") Long id) {
+    public User getOne(@HeaderParam("Authorization") String token,
+                       @PathParam("id") Long id) {
+        requireAdmin(token);
         User u = uR.findById(id);
-        
         return u;
     }
 
@@ -40,9 +51,11 @@ public class UserResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public User update(@PathParam("id") Long id, UpdateUserRequest req) {
+    public User update(@HeaderParam("Authorization") String token,
+                       @PathParam("id") Long id,
+                       UpdateUserRequest req) {
+        requireAdmin(token);
         User u = uR.findById(id);
-    
 
         if (req.email != null) u.email = req.email;
         if (req.password != null) u.password = req.password;
@@ -55,9 +68,10 @@ public class UserResource {
     @DELETE
     @Path("/{id}")
     @Transactional
-    public void delete(@PathParam("id") Long id) {
+    public void delete(@HeaderParam("Authorization") String token,
+                       @PathParam("id") Long id) {
+        requireAdmin(token);
         boolean deleted = uR.deleteById(id);
     }
 }
-
 

@@ -1,5 +1,5 @@
 package com.example.emissions.entity;
-
+//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
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
@@ -10,15 +10,11 @@ public class User extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(unique = true, nullable = false)
     public String email;
 
-    @Column(nullable = false)
     public String password;
 
-    @Column(nullable = false)
     public boolean admin = false;
 
-    @Column(nullable = false)
     public boolean active = true;
 }
