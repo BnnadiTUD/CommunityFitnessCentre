@@ -12,8 +12,12 @@ public class Emissions extends PanacheEntityBase {
 
     public String categoryName;
 
+    public String gasUnits;
+
     public String description;   
 
+    public String NK;
+    
     public int year;            
 
     public double value;    

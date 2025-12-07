@@ -21,6 +21,7 @@ class XmlProjectionRecord {
     public int Year;
     public String Scenario;
     public String Gas___Units;
+    public String NK;
     public double Value;
 }
 
@@ -69,6 +70,8 @@ public class XmlEmissionParser {
             e.year = r.Year;
             e.value = r.Value;
             e.scenario = r.Scenario;
+            e.gasUnits = r.Gas___Units;
+            e.NK = r.NK;
             e.sourceType = "XML";
             e.description = null; //for now
             eR.persist(e);

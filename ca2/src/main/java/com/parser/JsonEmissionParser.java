@@ -18,6 +18,9 @@ class JsonEmissionRecordDto {
     public int Year;
     public double Value;
     public String Scenario;
+    public String Gas___Units;
+    public String NK;
+
 
 }
 
@@ -52,6 +55,8 @@ public class JsonEmissionParser {
             e.year = r.Year;
             e.value = r.Value;
             e.scenario = r.Scenario;
+            e.gasUnits = r.Gas___Units;
+            e.NK = r.NK;
             e.sourceType = "JSON";
             e.description = null;
             eR.persist(e);

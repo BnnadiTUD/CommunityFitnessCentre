@@ -24,8 +24,8 @@ public class EmissionService {
         return emissionRepository.findById(id);
     }
 
-    public List<Emissions> getByCategory(String categoryCode) {
-        return emissionRepository.findByCategory(categoryCode);
+    public List<Emissions> getByName(String categoryName) {
+        return emissionRepository.findByName(categoryName);
     }
 
     @Transactional
@@ -39,12 +39,11 @@ public class EmissionService {
         Emissions existing = emissionRepository.findById(id);
         if (existing == null) return null;
 
-        existing.categoryCode = updated.categoryCode;
         existing.categoryName = updated.categoryName;
-        existing.description = updated.description;
         existing.year = updated.year;
         existing.value = updated.value;
         existing.scenario = updated.scenario;
+        existing.gasUnits = updated.gasUnits;
         existing.sourceType = updated.sourceType;
 
         return existing;

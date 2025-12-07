@@ -9,7 +9,7 @@ import java.util.List;
 @ApplicationScoped
 public class EmissionsRepo implements PanacheRepository<Emissions> {
 
-    public List<Emissions> findByCategory(String categoryCode) {
-        return list("categoryCode", categoryCode);
+    public List<Emissions> findByName(String categoryName) {
+        return list("categoryName", categoryName);
     }
 }
