@@ -2,7 +2,7 @@ package entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-
+ 
 @Entity
 public class Emissions extends PanacheEntityBase {
  
