@@ -10,9 +10,6 @@ public class Emissions extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(nullable = true)
-    public String categoryCode;
-
     public String categoryName;
 
     public String description;   
@@ -23,7 +20,6 @@ public class Emissions extends PanacheEntityBase {
     
     public String scenario;    
 
-    @Column(nullable = false)
     public String sourceType;    
 
     public boolean approved = false;
