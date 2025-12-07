@@ -63,7 +63,7 @@ public class XmlEmissionParser {
 
             Emissions e = new Emissions();
 
-            // Map XML fields -> entity fields
+            // Map XML fields to entity fields
 
             e.categoryName = r.Category__1_3;
             e.year = r.Year;
