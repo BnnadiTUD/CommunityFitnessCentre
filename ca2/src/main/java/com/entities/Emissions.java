@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 public class Emissions extends PanacheEntityBase {
  
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
